@@ -32,7 +32,11 @@ export const StyleMainHome = styled.section`
 
   .containerMain {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-right: 0%;
+    margin-left: 4.7vw;
 
     gap: 30px;
 
@@ -41,8 +45,14 @@ export const StyleMainHome = styled.section`
     width: 90vw;
   }
 
-  .containerMain__title {
-    margin-left: 4.7vw;
+  .containerMain__button {
+    background-color: var(--grey-3);
+
+    height: 30px;
+    width: 30px;
+
+    border: none;
+    border-radius: 4px;
   }
 
   .containerMain__text {
@@ -52,6 +62,14 @@ export const StyleMainHome = styled.section`
   @media (min-width: 768px) {
     .containerMain {
       margin-left: 10vw;
+    }
+
+    .containerMain__button {
+      margin-right: 15.6vw;
+    }
+
+    .containerMain__title {
+      margin-left: 4.7vw;
     }
 
     .container__texts {

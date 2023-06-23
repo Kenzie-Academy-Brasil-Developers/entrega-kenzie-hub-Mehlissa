@@ -22,17 +22,6 @@ export const StyleRegister = styled.form`
     margin-bottom: 20px;
   }
 
-  .selectContainer {
-    background-color: var(--grey-2);
-    color: var(--grey-1);
-
-    height: 43px;
-    padding: 0px 14px;
-    margin-bottom: 13px;
-
-    border: none;
-  }
-
   .buttonRegisterSubmit {
     background-color: var(--color-primary-Disable);
 

@@ -47,3 +47,15 @@ export const StylesInputsDiv = styled.div`
     opacity: 100%;
   }
 `;
+
+export const StylesSelect = styled.select`
+  background-color: var(--grey-2);
+  color: var(--grey-1);
+
+  height: 43px;
+  padding: 0px 14px;
+  margin-bottom: 13px;
+
+  border: none;
+  border-radius: 4px;
+`;

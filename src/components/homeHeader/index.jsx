@@ -3,8 +3,12 @@ import logo from "../../assets/logo.svg";
 import { toast } from "react-toastify";
 import { StyleHeaderHome } from "./style";
 import { StyleButtonsLinkBack } from "../../styles/StylesButtons";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
-export const HeaderHome = ({ setUsers }) => {
+export const HeaderHome = () => {
+  const { setUser } = useContext(UserContext);
+
   return (
     <StyleHeaderHome>
       <div className="container">
@@ -12,7 +16,7 @@ export const HeaderHome = ({ setUsers }) => {
         <StyleButtonsLinkBack
           onClick={() => {
             localStorage.clear();
-            setUsers([]);
+            setUser(null);
             toast.success("logout realizado com sucesso");
           }}
         >

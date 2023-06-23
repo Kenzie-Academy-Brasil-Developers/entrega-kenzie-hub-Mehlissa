@@ -1,11 +1,5 @@
-import { api } from "../../services/api";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "./loginSchema";
-import { toast } from "react-toastify";
 import { StyleLogin } from "./style";
-import { Link } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
 import {
   StylesInputs,
   StylesInputsDiv,
@@ -20,6 +14,11 @@ import {
   TypographySubtitles,
   TypographyTitles,
 } from "../../styles/Typography";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
+import { useForm } from "react-hook-form";
+import { loginSchema } from "./loginSchema";
+import { Link } from "react-router-dom";
 
 export const LoginForm = () => {
   const {
@@ -31,22 +30,10 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const navigate = useNavigate();
-
-  const loginUser = async (formData) => {
-    try {
-      const { data } = await api.post("/sessions", formData);
-      localStorage.setItem("@TOKEN", data.token);
-      localStorage.setItem("@USERID", data.user.id);
-      toast.success("Login realizado com sucesso");
-      navigate("/home");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
+  const { userLogin } = useContext(UserContext);
 
   const submit = async (formData) => {
-    await loginUser(formData);
+    await userLogin(formData);
     reset();
   };
 
@@ -57,18 +44,14 @@ export const LoginForm = () => {
           <TypographyTitles>Login</TypographyTitles>
         </div>
         <TypographySubtitles>Email</TypographySubtitles>
-        <p>
-          <ErrorsMensage>{errors.email?.message}</ErrorsMensage>
-        </p>
+        <ErrorsMensage>{errors.email?.message}</ErrorsMensage>
         <StylesInputs
           placeholder="Digite aqui seu email"
           type="email"
           {...register("email")}
         />
         <TypographySubtitles>Senha</TypographySubtitles>
-        <p>
-          <ErrorsMensage>{errors.password?.message}</ErrorsMensage>
-        </p>
+        <ErrorsMensage>{errors.password?.message}</ErrorsMensage>
         <StylesInputsDiv>
           <StylesInputsPassword
             placeholder="Digite aqui sua senha"

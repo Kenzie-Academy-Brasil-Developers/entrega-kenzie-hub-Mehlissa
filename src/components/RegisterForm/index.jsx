@@ -1,11 +1,8 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerSchema } from "./RegisterSchema";
-import { toast } from "react-toastify";
 import { StyleRegister } from "./style";
-import { StylesInputs } from "../../styles/StylesInputs";
+import { StylesInputs, StylesSelect } from "../../styles/StylesInputs";
 import { ErrorsMensage } from "../../styles/ErrorsMensage";
 import { StylesButtons } from "../../styles/StylesButtons";
 import {
@@ -13,6 +10,8 @@ import {
   TypographySubtitles,
   TypographyTitles,
 } from "../../styles/Typography";
+import { useContext } from "react";
+import { UserContext } from "../../providers/UserContext";
 
 export const RegisterForm = () => {
   const {
@@ -24,21 +23,10 @@ export const RegisterForm = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const navigate = useNavigate();
-
-  const registerUsers = async (formData) => {
-    try {
-      const { data } = await api.post("/users", formData);
-      console.log(data);
-      toast.success("Conta criada com sucesso");
-      navigate("/");
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
-  };
+  const { userRegister } = useContext(UserContext);
 
   const submit = async (formData) => {
-    await registerUsers(formData);
+    await userRegister(formData);
     reset();
   };
 
@@ -95,7 +83,7 @@ export const RegisterForm = () => {
         />
         <TypographySubtitles>Selecionar módulo</TypographySubtitles>
         <ErrorsMensage>{errors.course_module?.message}</ErrorsMensage>
-        <select className="selectContainer" {...register("course_module")}>
+        <StylesSelect {...register("course_module")}>
           <option value="Primeiro módulo  (Introdução ao Frontend)">
             Primeiro módulo
           </option>
@@ -108,7 +96,7 @@ export const RegisterForm = () => {
           <option value="Quarto módulo (Backend Avançado)">
             Quarto módulo
           </option>
-        </select>
+        </StylesSelect>
         <StylesButtons className="buttonRegisterSubmit">
           Cadastrar
         </StylesButtons>
