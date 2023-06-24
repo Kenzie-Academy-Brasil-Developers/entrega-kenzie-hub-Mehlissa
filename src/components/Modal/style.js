@@ -49,7 +49,7 @@ export const ModalStyle = styled.div`
 
     padding: 0px 18px;
 
-    gap: 15px;
+    gap: 10px;
   }
 
   .modalContaier__header--ButtonClose {

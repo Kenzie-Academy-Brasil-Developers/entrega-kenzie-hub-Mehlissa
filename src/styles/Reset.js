@@ -33,6 +33,7 @@ export const Reset = createGlobalStyle`
         body {
             line-height: 1;
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
         }
         ol, ul {
             list-style: none;

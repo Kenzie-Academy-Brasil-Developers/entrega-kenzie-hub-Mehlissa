@@ -8,12 +8,14 @@ import {
 import { StyleMainHome } from "./style";
 import plusimage from "../../assets/plus.png";
 import { Modal } from "../Modal";
-import { useState } from "react";
 import { SectionTech } from "../SectionTech";
+import { ModalTech } from "../ModalTech";
+import { TechContext } from "../../providers/TechContext";
 
 export const HomeMain = () => {
-  const [openModal, setOpenModal] = useState(false);
   const { user } = useContext(UserContext);
+  const { openModal, setOpenModal } = useContext(TechContext);
+
   return (
     <StyleMainHome>
       <div className="container">
@@ -42,6 +44,7 @@ export const HomeMain = () => {
         <SectionTech />
       </section>
       <Modal isOpen={openModal} setOpenModal={setOpenModal} />
+      <ModalTech />
     </StyleMainHome>
   );
 };

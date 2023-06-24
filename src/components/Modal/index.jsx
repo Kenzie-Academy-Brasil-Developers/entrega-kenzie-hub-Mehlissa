@@ -6,6 +6,9 @@ import { api } from "../../services/api";
 import { StylesButtons } from "../../styles/StylesButtons";
 import { StylesInputs, StylesSelect } from "../../styles/StylesInputs";
 import { Background, ModalStyle } from "./style";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ModalSchema } from "./ModalSchema";
+import { ErrorsMensage } from "../../styles/ErrorsMensage";
 
 export const Modal = ({ isOpen, setOpenModal }) => {
   const { createTech } = useContext(TechContext);
@@ -13,9 +16,11 @@ export const Modal = ({ isOpen, setOpenModal }) => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
+    formState: { errors },
     reset,
-  } = useForm({});
+  } = useForm({
+    resolver: zodResolver(ModalSchema),
+  });
 
   const submit = async (formData) => {
     await createTech(formData);
@@ -40,6 +45,7 @@ export const Modal = ({ isOpen, setOpenModal }) => {
             <form onSubmit={handleSubmit(submit)}>
               <div className="modalContaier__main">
                 <label htmlFor="">Nome</label>
+                <ErrorsMensage>{errors.title?.message}</ErrorsMensage>
                 <StylesInputs
                   type="text"
                   placeholder="Typescript"
@@ -47,6 +53,7 @@ export const Modal = ({ isOpen, setOpenModal }) => {
                 />
 
                 <label htmlFor="">Selecionar status</label>
+                <ErrorsMensage>{errors.status?.message}</ErrorsMensage>
                 <StylesSelect {...register("status")}>
                   <option value="Iniciante">Iniciante</option>
                   <option value="Intermediário">Intermediário</option>

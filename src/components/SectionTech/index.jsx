@@ -5,9 +5,11 @@ import {
   TypographyTitles,
 } from "../../styles/Typography";
 import { EmptyList, StyleTechList } from "./style";
+import { TechContext } from "../../providers/TechContext";
 
 export const SectionTech = () => {
   const { user } = useContext(UserContext);
+  const { setOpenModalTech, setTech, settechId } = useContext(TechContext);
 
   if (user.techs.length === 0) {
     return (
@@ -23,7 +25,11 @@ export const SectionTech = () => {
     <StyleTechList>
       {user.techs.map((user) => (
         <li
-          onClick={() => console.log("cliclou")}
+          onClick={() => {
+            setOpenModalTech(true);
+            setTech(user);
+            settechId(user.id);
+          }}
           className="listContainer"
           key={user.id}
         >

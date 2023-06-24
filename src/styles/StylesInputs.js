@@ -13,6 +13,22 @@ export const StylesInputs = styled.input`
   outline: 0;
 `;
 
+export const StylesDiv = styled.div`
+  background-color: var(--grey-2);
+  color: var(--grey-0);
+
+  height: 43px;
+  padding: 0px 14px;
+  margin-bottom: 10px;
+
+  border-radius: 4px;
+  border: none;
+  outline: 0;
+
+  display: flex;
+  align-items: center;
+`;
+
 export const StylesInputsPassword = styled.input`
   background-color: var(--grey-2);
   color: var(--grey-0);
