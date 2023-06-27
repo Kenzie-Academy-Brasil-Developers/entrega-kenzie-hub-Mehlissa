@@ -10,7 +10,7 @@ export const StylesButtons = styled.button`
   border-radius: 4px;
 `;
 
-export const StyleButtonsLink = styled.div`
+export const StyleButtonsLink = styled.a`
   background-color: var(--grey-1);
 
   width: 100%;
@@ -36,7 +36,7 @@ export const StyleButtonsLink = styled.div`
   }
 `;
 
-export const StyleButtonsLinkBack = styled.div`
+export const StyleButtonsLinkBack = styled.a`
   background-color: var(--grey-3);
 
   padding: 2px;

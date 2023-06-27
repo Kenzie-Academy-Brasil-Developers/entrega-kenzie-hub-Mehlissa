@@ -1,15 +1,25 @@
 import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../services/api";
+import { HomeMain } from "../components/homeMain";
+import { useContext } from "react";
+import { UserContext } from "./UserContext";
 
 export const TechContext = createContext({});
 
 export const TechProvider = ({ children }) => {
   const token = localStorage.getItem("@TOKEN");
-  const [openModal, setOpenModal] = useState(false);
-  const [opneModalTech, setOpenModalTech] = useState(false);
   const [tech, setTech] = useState({});
   const [techId, settechId] = useState(null);
+
+  const {
+    user,
+    setUser,
+    opneModalTech,
+    setOpenModalTech,
+    openModal,
+    setOpenModal,
+  } = useContext(UserContext);
 
   const createTech = async (formData) => {
     try {
@@ -20,9 +30,6 @@ export const TechProvider = ({ children }) => {
       });
       setOpenModal(false);
       toast.success("Tecnologia criada com sucesso");
-      setTimeout(() => {
-        location.reload();
-      }, 1300);
     } catch (error) {
       toast.error(error.response.data.message);
     }
@@ -39,26 +46,20 @@ export const TechProvider = ({ children }) => {
       });
       setOpenModalTech(false);
       toast.success("Tecnologia alterada com sucesso");
-      setTimeout(() => {
-        location.reload();
-      }, 1300);
     } catch (error) {
-      error;
+      toast.error(error.response.data.message);
     }
   };
 
-  const deleteTech = async (techId) => {
+  const deleteTech = async () => {
     try {
-      const { data } = await api.delete(`/users/techs/${techId}`, {
+      const { data } = await api.delete(`/users/techs/${idTech}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setOpenModalTech(false);
       toast.success("Tecnologia deletada com sucesso");
-      setTimeout(() => {
-        location.reload();
-      }, 1300);
     } catch (error) {
       toast.error(error.response.data.message);
     }

@@ -28,10 +28,6 @@ export const ModalTech = () => {
     reset();
   };
 
-  const submitDelete = async () => {
-    await deleteTech(techId);
-  };
-
   if (opneModalTech) {
     return (
       <BackgroundTech>
@@ -61,13 +57,17 @@ export const ModalTech = () => {
               </StylesSelect>
             </div>
             <div className="modalContaier__divButtons">
-              <StylesButtons className="modalContaier__divButtons--buttonSave">
+              <StylesButtons
+                type="submit"
+                className="modalContaier__divButtons--buttonSave"
+              >
                 Salvar alteração
               </StylesButtons>
               <button
+                type="button"
                 className="modalContaier__divButtons--buttonDelete"
                 onClick={() => {
-                  submitDelete();
+                  deleteTech();
                 }}
               >
                 Excluir
